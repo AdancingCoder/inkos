@@ -35,9 +35,8 @@ export const initCommand = new Command("init")
         notify: [],
         daemon: {
           schedule: {
-            radarCron: "0 9 * * *",
-            writeCron: "0 14 * * *",
-            auditCron: "0 17 * * *",
+            radarCron: "0 */6 * * *",
+            writeCron: "*/15 * * * *",
           },
           maxConcurrentBooks: 3,
         },

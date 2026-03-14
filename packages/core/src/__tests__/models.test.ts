@@ -292,9 +292,10 @@ describe("ProjectConfigSchema", () => {
   it("applies default daemon config", () => {
     const result = ProjectConfigSchema.parse(validProject);
     expect(result.daemon.maxConcurrentBooks).toBe(3);
-    expect(result.daemon.schedule.radarCron).toBe("0 9 * * *");
-    expect(result.daemon.schedule.writeCron).toBe("0 14 * * *");
-    expect(result.daemon.schedule.auditCron).toBe("0 17 * * *");
+    expect(result.daemon.schedule.radarCron).toBe("0 */6 * * *");
+    expect(result.daemon.schedule.writeCron).toBe("*/15 * * * *");
+    expect(result.daemon.chaptersPerCycle).toBe(1);
+    expect(result.daemon.maxChaptersPerDay).toBe(50);
   });
 
   it("applies default empty notify array", () => {

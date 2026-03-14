@@ -41,8 +41,11 @@ export const upCommand = new Command("up")
         modelOverrides: config.modelOverrides,
         radarCron: config.daemon.schedule.radarCron,
         writeCron: config.daemon.schedule.writeCron,
-        auditCron: config.daemon.schedule.auditCron,
         maxConcurrentBooks: config.daemon.maxConcurrentBooks,
+        chaptersPerCycle: config.daemon.chaptersPerCycle,
+        retryDelayMs: config.daemon.retryDelayMs,
+        cooldownAfterChapterMs: config.daemon.cooldownAfterChapterMs,
+        maxChaptersPerDay: config.daemon.maxChaptersPerDay,
         onChapterComplete: (bookId, chapter, status) => {
           const icon = status === "approved" ? "+" : "!";
           log(`  [${icon}] ${bookId} Ch.${chapter} — ${status}`);

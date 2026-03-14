@@ -66,11 +66,14 @@ export const ProjectConfigSchema = z.object({
   modelOverrides: z.record(z.string(), z.string()).optional(),
   daemon: z.object({
     schedule: z.object({
-      radarCron: z.string().default("0 9 * * *"),
-      writeCron: z.string().default("0 14 * * *"),
-      auditCron: z.string().default("0 17 * * *"),
+      radarCron: z.string().default("0 */6 * * *"),
+      writeCron: z.string().default("*/15 * * * *"),
     }),
     maxConcurrentBooks: z.number().int().min(1).default(3),
+    chaptersPerCycle: z.number().int().min(1).max(20).default(1),
+    retryDelayMs: z.number().int().min(0).default(30_000),
+    cooldownAfterChapterMs: z.number().int().min(0).default(10_000),
+    maxChaptersPerDay: z.number().int().min(1).default(50),
     qualityGates: QualityGatesSchema.default({
       maxAuditRetries: 2,
       pauseAfterConsecutiveFailures: 3,
@@ -78,11 +81,14 @@ export const ProjectConfigSchema = z.object({
     }),
   }).default({
     schedule: {
-      radarCron: "0 9 * * *",
-      writeCron: "0 14 * * *",
-      auditCron: "0 17 * * *",
+      radarCron: "0 */6 * * *",
+      writeCron: "*/15 * * * *",
     },
     maxConcurrentBooks: 3,
+    chaptersPerCycle: 1,
+    retryDelayMs: 30_000,
+    cooldownAfterChapterMs: 10_000,
+    maxChaptersPerDay: 50,
     qualityGates: {
       maxAuditRetries: 2,
       pauseAfterConsecutiveFailures: 3,
