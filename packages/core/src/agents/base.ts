@@ -36,7 +36,7 @@ export abstract class BaseAgent {
   /**
    * Chat with web search enabled.
    * OpenAI: uses native web_search_options / web_search_preview.
-   * Other providers: searches via DuckDuckGo, fetches top results, injects into prompt.
+   * Other providers: searches via Tavily API (TAVILY_API_KEY), injects results into prompt.
    */
   protected async chatWithSearch(
     messages: ReadonlyArray<LLMMessage>,
